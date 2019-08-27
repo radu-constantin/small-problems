@@ -3,12 +3,12 @@ vehicles = [
   'motorcycle', 'motorcycle', 'car', 'truck'
 ]
 
-def counter(array)
-  counter = Hash.new(0)
+def counter (array)
+  count = Hash.new (0)
   array.each do |word|
-    counter[word] += 1
-end
-puts counter
+    count[word] += 1
+  end
+  puts count
 end
 
 counter(vehicles)
