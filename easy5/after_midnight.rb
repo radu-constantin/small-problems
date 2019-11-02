@@ -1,38 +1,43 @@
-def time_of_day (minutes)
-  hour_minutes = []
-
-  if minutes > 0
-    hh = (minutes % 1440) / 60
-    if hh < 10
-      hh = hh.to_s.prepend("0")
-    end
-      hour_minutes << hh
-    mm = (minutes % 1440) % 60
-    if mm < 10
-      mm = mm.to_s.prepend ("0")
-    end
-    hour_minutes << mm
-
-  elsif minutes < 0
-    hh = (1440 - (minutes.abs % 1440)) / 60
-    if hh < 10
-      hh = hh.to_s.prepend("0")
-    end
-      hour_minutes << hh
-    mm = (1440 - (minutes.abs % 1440)) % 60
-    if mm == 0
-      mm = mm.to_s.concat ("0")
-      elsif mm < 10
-      mm = mm.to_s.prepend("0")
-    end
-    hour_minutes << mm
-
-    elsif minutes == 0
-    hour_minutes << 0,0
-
-
+def after_midnight (minutes)
+time = minutes.divmod(1440)[1].divmod(60)
+if time[0] < 10
+  time[0] = "0" + time[0].to_s
   end
-  hour_minutes.join(":")
+
+if time[1] < 10
+  time[1] = "0" + time[1].to_s
+end
+time.join(":")
 end
 
-puts time_of_day (-3000)
+def before_midnight (minutes)
+time = (1440 - minutes.abs.divmod(1440)[1]).divmod(60)
+if time[0] < 10
+  time[0] = "0" + time[0].to_s
+  end
+
+if time[1] < 10
+  time[1] = "0" + time[1].to_s
+end
+time.join(":")
+end
+
+
+def time_of_day(minutes)
+  if minutes < 0
+    before_midnight(minutes)
+  else
+    after_midnight(minutes)
+  end
+end
+
+
+
+
+puts time_of_day(0) == "00:00"
+puts time_of_day(-3) == "23:57"
+puts time_of_day(35) == "00:35"
+puts time_of_day(-1437) == "00:03"
+puts time_of_day(3000) == "02:00"
+puts time_of_day(800) == "13:20"
+puts time_of_day(-4231) == "01:29"

@@ -1,4 +1,4 @@
-WORDS = {
+NUMBERS_TO_WORDS = {
   0 => 'zero',
   1 => 'one',
   2 => 'two',
@@ -21,11 +21,25 @@ WORDS = {
   19 => 'nineteen'
 }
 
-def alphabetic_number_sort (array)
-  array.map! do |number|
-    WORDS[number]
+
+
+
+def alphabetic_number_sort(range)
+  alphabetical_order =[]
+  words = range.map do |number|
+    NUMBERS_TO_WORDS[number]
   end
-  array.sort.map do |letter|
-    WORDS.key(letter)
-    end
-end
+  words.sort.each do |word|
+    alphabetical_order << NUMBERS_TO_WORDS.key(word)
+  end
+  alphabetical_order
+  end
+
+
+
+
+
+puts alphabetic_number_sort((0..19).to_a) == [
+  8, 18, 11, 15, 5, 4, 14, 9, 19, 1, 7, 17,
+  6, 16, 10, 13, 3, 12, 2, 0
+]

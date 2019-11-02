@@ -1,12 +1,11 @@
-def swap (string)
-  word_array = string.split(' ')
-  word_array.each do |word|
-    first_letter = word[0]
-    last_letter = word[-1]
-    word[0] = last_letter
-    word[-1] = first_letter
-  end
-  word_array.join(' ')
+def swap_first_last_characters(word)
+  word[0], word[-1] = word[-1], word[0]
+  word
 end
 
-  puts swap("miau")
+def swap(words)
+  result = words.split.map do |word|
+    swap_first_last_characters(word)
+  end
+  result.join(' ')
+end
